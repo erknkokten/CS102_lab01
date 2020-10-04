@@ -1,0 +1,131 @@
+/**
+ * Auto Generated Java Class.
+ */
+import java.util.Arrays;
+public class IntBag {
+  
+  int[] bag;
+  public IntBag() { 
+    this.bag = new int[4];
+    this.bag[0] = -1;
+  }
+  
+  public void add(int value, int index){
+    if(value >= 0){
+      //size of array including -1 in it
+      int size =getSize() + 1;
+      
+      if(index + 1 >= this.bag.length){
+        //sýðana kadar artýrýyo
+        do{
+          /* New value won't fit, create a temporary array to not lose the values and double the size of the bag*/
+          int[] temp = bag;
+          this.bag = new int[this.bag.length * 2];
+          for(int i = 0; i < temp.length ; i++){
+            bag[i] = temp[i];
+          }
+        }while(index + 1 >= this.bag.length);
+        
+        for(int i = bag.length - 1; i >= index+1 ;i--){
+          bag[i] = bag[i-1];
+        }
+        bag[index] = value;
+        
+      }
+      else{
+        for(int i = bag.length - 1; i >= index+1 ;i--){
+          bag[i] = bag[i-1];
+        }
+        bag[index] = value;
+      }
+    }
+    else
+      System.out.println("You shouldn't enter negative values.");
+  }
+  
+  public void add(int value){
+    if(value >= 0){
+      //size of array including -1 in it
+      int size =getSize() + 1;
+      
+      if(size == this.bag.length){
+        /* New value won't fit, create a temporary array to not lose the values and double the size of the bag*/
+        int[] temp = bag;
+        this.bag = new int[this.bag.length * 2];
+        for(int i = 0; i < temp.length ; i++){
+          bag[i] = temp[i];
+        }
+        bag[size - 1] = value;
+        bag[size] = -1;
+      }
+      else{
+        bag[size - 1] = value;
+        bag[size] = -1;
+      }
+    }
+    else
+      System.out.println("You shouldn't enter negative values.");
+  }
+  
+  public void remove(int index){
+    //size of array including -1 in it
+    int size =getSize() + 1;
+    
+    bag[index] = bag[size -2];
+    bag[size - 2] = bag[size - 1];
+    bag[size - 1] = 0;
+  }
+  
+  public boolean checker(int value){
+    //size of array including -1 in it
+    int size =getSize() + 1;
+    
+    for(int i = 0; i < size-1; i++){
+      if(bag[i] == value){
+        return true;
+      }
+    }
+    
+    return false;
+  }
+  
+  public String toString(){
+    String str="";
+    str = str + "[ ";
+    
+    for(int i = 0; getSize() - 1 > i; i++){
+      str = str + this.bag[i] + ", ";
+    }
+    str = str +this.bag[getSize() - 1] + " ]";
+    return str;
+  }
+  
+  public int getSize(){
+    int size = 0;
+    /* Finding the size of the array*/
+    for(int i = 0; i<this.bag.length; i++){
+      if (this.bag[i] == -1){
+        size = i;//size -1 is where '-1' exists
+      }
+    }
+    //number of elements without -1 in it
+    return size;
+  }
+  
+  public int getValue(int index){
+    return this.bag[index];
+  }
+  
+  public void removeAll(int value){
+    int size = getSize();
+    for(int i = 0; i < size; i++){
+      if(bag[i] == value){
+        remove(i);
+        i = 0;
+      }
+    }
+  }
+  
+}
+
+
