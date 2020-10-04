@@ -116,6 +116,16 @@ public class IntBag {
     return this.bag[index];
   }
   
+  public void removeAll(int value){
+    int size = getSize();
+    for(int i = 0; i < size; i++){
+      if(bag[i] == value){
+        remove(i);
+        i = 0;
+      }
+    }
+  }
+  
 }
 
 
