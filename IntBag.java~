@@ -50,7 +50,10 @@ public class IntBag {
       
       if(size == this.bag.length){
         /* New value won't fit, create a temporary array to not lose the values and double the size of the bag*/
-        int[] temp = bag;
+        int[] temp = new int[bag.length];
+        for(int i = 0; i<bag.length;i++){
+          temp[i] = bag[i];
+        }
         this.bag = new int[this.bag.length * 2];
         for(int i = 0; i < temp.length ; i++){
           bag[i] = temp[i];
@@ -114,6 +117,16 @@ public class IntBag {
   
   public int getValue(int index){
     return this.bag[index];
+  }
+  
+  public void removeAll(int value){
+    int size = getSize();
+    for(int i = 0; i < size; i++){
+      if(bag[i] == value){
+        remove(i);
+        i = 0;
+      }
+    }
   }
   
 }

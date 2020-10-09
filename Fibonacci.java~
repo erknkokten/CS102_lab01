@@ -1,7 +1,5 @@
 /**
- * Fibonacci displayer: displays first 40 elements of Fibonacci numbers usingIntBg class
- * @author Ozmen Erkin Kokten
- * @date 09.10.2020
+ * Auto Generated Java Class.
  */
 public class Fibonacci {
   
