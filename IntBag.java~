@@ -1,22 +1,31 @@
 /**
- * Auto Generated Java Class.
+ * IntBag class
+ * @author Ozmen Erkin Kokten
+ * @date 09.10.2020
  */
 import java.util.Arrays;
 public class IntBag {
   
   int[] bag;
+  /**
+   * IntBag constructor
+   * */
   public IntBag() { 
     this.bag = new int[4];
     this.bag[0] = -1;
   }
-  
+  /**
+   *  adds a value at a particular index location.
+   * @param value the value that is going to be added
+   * @param index index location that the value is going to be added.
+   * */
   public void add(int value, int index){
     if(value >= 0){
       //size of array including -1 in it
       int size =getSize() + 1;
       
       if(index + 1 >= this.bag.length){
-        //sýðana kadar artýrýyo
+        //increases until the value fits to the index
         do{
           /* New value won't fit, create a temporary array to not lose the values and double the size of the bag*/
           int[] temp = bag;
@@ -43,6 +52,10 @@ public class IntBag {
       System.out.println("You shouldn't enter negative values.");
   }
   
+  /**
+   *  adds a value to the end of the collection
+   * @param value the value that is going to be added
+   * */
   public void add(int value){
     if(value >= 0){
       //size of array including -1 in it
@@ -69,7 +82,10 @@ public class IntBag {
     else
       System.out.println("You shouldn't enter negative values.");
   }
-  
+  /**
+   * removes the value at a given index
+   * @param index index location to be removed.
+   * */
   public void remove(int index){
     //size of array including -1 in it
     int size =getSize() + 1;
@@ -79,6 +95,11 @@ public class IntBag {
     bag[size - 1] = 0;
   }
   
+  /**
+   * checks if the bag contains the given value.
+   * @param value value to be checked
+   * @return true if contains, false if not
+   * */
   public boolean checker(int value){
     //size of array including -1 in it
     int size =getSize() + 1;
@@ -92,6 +113,10 @@ public class IntBag {
     return false;
   }
   
+  /**
+   * toString method
+   * @return returns the bag info.
+   * */
   public String toString(){
     String str="";
     str = str + "[ ";
@@ -103,6 +128,10 @@ public class IntBag {
     return str;
   }
   
+  /**
+   * method that gets the size of array not including -1 in the end
+   * @return size of bag
+   * */
   public int getSize(){
     int size = 0;
     /* Finding the size of the array*/
@@ -114,19 +143,53 @@ public class IntBag {
     //number of elements without -1 in it
     return size;
   }
-  
+   
+  /**
+   * method that returns the value at a specific location
+   * @param index index location 
+   * @return value at the index location
+   * */
   public int getValue(int index){
     return this.bag[index];
   }
   
+  /**
+   * removes all of the given value from the bag
+   * @param value value to be removed
+   * */
   public void removeAll(int value){
+    
+    int count = 0;
+    int size = getSize() + 1;//include -1's index
+    //get the number of elements corresponding 'value'
+    for(int i = 0; i<size; i++){
+      if(bag[i] == value){
+        count ++;
+      }
+    }
+    
+    
+    
+    for(int i = 0; i<size; i++){
+      if(( bag[i] == value)&& (count != 0)){
+        count--;
+        int[] temp = new int[bag.length];
+        for(int j = i; j <= size; j++){
+          temp[j] = bag[j];//-1 dahil
+        }
+        for(int j = i; j<size;j++){
+          bag[j] = temp[j+1];
+        } 
+      }
+    }
+    /*
     int size = getSize();
     for(int i = 0; i < size; i++){
       if(bag[i] == value){
         remove(i);
         i = 0;
       }
-    }
+    }*/
   }
   
 }

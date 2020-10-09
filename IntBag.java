@@ -158,13 +158,36 @@ public class IntBag {
    * @param value value to be removed
    * */
   public void removeAll(int value){
+    
+    int count = 0;
+    int size = getSize() + 1;//include -1's index
+    //get the number of elements corresponding 'value'
+    for(int i = 0; i<size; i++){
+      if(bag[i] == value){
+        count ++;
+      }
+    }   
+        
+    for(int i = 0; i<size; i++){
+      if(( bag[i] == value)&& (count != 0)){
+        count--;
+        int[] temp = new int[bag.length];
+        for(int j = i; j <= size; j++){
+          temp[j] = bag[j];//-1 dahil
+        }
+        for(int j = i; j<size;j++){
+          bag[j] = temp[j+1];
+        } 
+      }
+    }
+    /*
     int size = getSize();
     for(int i = 0; i < size; i++){
       if(bag[i] == value){
         remove(i);
         i = 0;
       }
-    }
+    }*/
   }
   
 }
